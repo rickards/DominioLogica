@@ -1,0 +1,2 @@
+# DominioLogica
+Resolvedor de Expressão 
