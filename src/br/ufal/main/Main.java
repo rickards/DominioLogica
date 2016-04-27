@@ -11,6 +11,7 @@ import br.ufal.equivalences.DistrubutiveInverseAND;
 import br.ufal.equivalences.DistrubutiveInverseOR;
 import br.ufal.equivalences.DominanceAND;
 import br.ufal.equivalences.DominanceOR;
+import br.ufal.equivalences.DoubleComplement;
 import br.ufal.equivalences.EliminatingBiImplication;
 import br.ufal.equivalences.EliminatingImplication;
 import br.ufal.equivalences.IdentityAND;
@@ -56,13 +57,16 @@ public class Main {
 		//String exp = "(AvBvC)^~D^(CvBv~A)^(~GvP)";
 		//String exp = "A^~Bv~A^~BvA^B^~Cv~A^B^~C";
 		//REGRA DE INTRODUÇÃO
-		String exp = "~A^B^CvA^~B^CvA^B^~CvA^B^CvA^B^C";
+		//String exp = "~A^B^CvA^~B^CvA^B^~CvA^B^CvA^B^C";
 		//String exp = "~(A^C)^A";
 		//String exp = "~Av1";
+		String exp = "~(AvB)^~~~C";
+		//String exp = "~~C";
 		Motor engine = new Motor();
 		Expressao result = engine.buildTree(exp);
 		System.out.println(result);
 		Resolvedor solver = new Resolvedor();
+		solver.addLawTopDown(new DoubleComplement());
 		solver.addLawTopDown(new DeMorgan());
 		solver.addLawTopDown(new DominanceAND());
 		solver.addLawTopDown(new DominanceOR());

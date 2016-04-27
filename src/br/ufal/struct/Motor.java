@@ -1,6 +1,7 @@
 package br.ufal.struct;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.regex.Pattern;
 
 import br.ufal.operators.AND;
@@ -57,6 +58,7 @@ public class Motor {
 				list.add(new NOT());
 			}
 		}
+		
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NOT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		ArrayList<Integer> num = new ArrayList<>();
 		for (int i = 0; i < list.size(); i++) {
@@ -66,18 +68,18 @@ public class Motor {
 		}
 		
 		ArrayList<Expressao> newlist = new ArrayList<>();
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = list.size()-1; i >= 0; i--) {
 			if(!num.contains(i)){
 				newlist.add(list.get(i));
 			}else{
-				NOT a = new NOT();
-				a.setNegado(list.get(i+1));
-				num.remove((Object)i);
-				newlist.add(a);
-				i++;
+				((NOT) list.get(i)).setNegado(list.get(i+1));
+				newlist.remove(list.get(i+1));
+				newlist.add(list.get(i));
 			}
 		}
+		Collections.reverse(newlist);
 		list=newlist;
+
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~AND~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		num = new ArrayList<>();
 		for (int i = 0; i < list.size(); i++) {

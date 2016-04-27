@@ -22,6 +22,11 @@ public class NOT extends Expressao{
 	
 	@Override
 	public String toString() {
+		{//CONDICIONAL IMPLEMENTADO PARA INABIT
+			if(negado instanceof NOT){
+				return "~("+negado+")";
+			}
+		}
 		return "~"+negado;
 	}
 	
