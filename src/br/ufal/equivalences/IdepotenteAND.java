@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import br.ufal.operators.AND;
+import br.ufal.operators.Proposition;
 import br.ufal.struct.Leis;
 import br.ufal.struct.Expressao;
 import br.ufal.struct.Tuple;
@@ -23,6 +24,7 @@ public class IdepotenteAND implements Leis{
 					and.add(((AND)exp).getForToString(name));		
 				}
 			}
+			if(((AND)and).getList().size()==1) return new Tuple<String, Expressao>("Idepotente",((AND)and).getList().get(0));
 			return new Tuple<String, Expressao>("Idepotente",and);
 		}
 		return new Tuple<String, Expressao>(null, exp);
