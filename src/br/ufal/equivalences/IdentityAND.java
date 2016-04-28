@@ -18,5 +18,5 @@ public class IdentityAND implements Leis{
 		}
 		return new Tuple<String, Expressao>(null, exp);
 	}
-
+	
 }

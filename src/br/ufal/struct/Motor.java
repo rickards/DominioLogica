@@ -28,10 +28,10 @@ public class Motor {
 			if(Pattern.compile("[A-Z0-1]").matcher(letra).find()){
 				list.add(new Proposition(letra));
 			}
-			else if(letra.equals("^")){
+			else if(letra.equals("^")||letra.equals(".")){
 				list.add(new AND());
 			}
-			else if(letra.equals("v")){
+			else if(letra.equals("v")||letra.equals("+")){
 				list.add(new OR());
 			}
 			else if(letra.equals("#")){
