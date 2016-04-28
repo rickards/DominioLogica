@@ -6,6 +6,7 @@ import java.util.Set;
 
 import br.ufal.operators.AND;
 import br.ufal.operators.OR;
+import br.ufal.operators.Proposition;
 import br.ufal.struct.Leis;
 import br.ufal.struct.Expressao;
 import br.ufal.struct.Motor;
@@ -47,10 +48,15 @@ public class DistrubutiveInverseAND implements Leis{
 			ArrayList<Expressao> eliminados = new ArrayList<Expressao>();
 			for (Expressao iterator_and : ((AND)exp).getList()) {
 				if(iterator_and.contains(new Motor().buildTree(saida))){
-					((OR)iterator_and).remove(new Motor().buildTree(saida));
-					eliminados.add(iterator_and);
-					if(((OR)iterator_and).getList().size()==1) and.add(((OR)iterator_and).getList().get(0));
-					else and.add(iterator_and);
+					if(iterator_and instanceof OR){
+						((OR)iterator_and).remove(new Motor().buildTree(saida));
+						eliminados.add(iterator_and);
+						if(((OR)iterator_and).getList().size()==1) and.add(((OR)iterator_and).getList().get(0));
+						else and.add(iterator_and);
+					}else if(iterator_and instanceof Proposition){
+						eliminados.add(iterator_and);
+						and.add(new Proposition("0"));
+					}
 				}
 			}
 			or.add(and);
