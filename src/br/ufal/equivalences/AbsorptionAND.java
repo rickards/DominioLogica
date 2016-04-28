@@ -15,6 +15,7 @@ public class AbsorptionAND implements Leis{
 				if(element2 instanceof OR){
 					if(element2.contains(element)&&!element.equals(element2)){
 						((AND)exp).remove(element2);
+						if(((AND)exp).getList().size()==1) return new Tuple<String, Expressao>("Absorption",((AND)exp).getList().get(0));
 						return new Tuple<String, Expressao>("Absorption",exp);
 					}
 				}
